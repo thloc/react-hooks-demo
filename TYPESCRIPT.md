@@ -479,3 +479,16 @@ export interface StringValidator {
     isAcceptable(s: string): boolean;
 }```
 
+## NOTE
+```
+// TypeScript 3.7
+// Before
+if (foo && foo.bar && foo.bar.baz) {
+    // ...
+}
+
+// After-ish
+if (foo?.bar?.baz) {
+    // ...
+}
+```
