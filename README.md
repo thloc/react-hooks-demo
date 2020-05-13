@@ -7,13 +7,13 @@ In the project directory, you can run:
 `yarn build`
 `yarn eject`
 
-### Create the project
+## Create the project
 ```
 npx create-react-app ABC
 npm i --save-dev node-sass
 ```
 
-### VSCode
+## VSCode
 - SCSS Formatter
 - ReactJS code snippets
 - Ctrl + Option + O (Window: Alt + Shift + O) : delete import not use.
@@ -94,7 +94,7 @@ function ColorBox() {
 }
 ```
 
-#### useState()
+## useState()
 ```
 function TodoList() {
   const [todoList, setTodoList] = useState(['love', 'easy', 'frontend']);
@@ -164,5 +164,108 @@ function ColorBox() {
   });
 
   // ....
+}
+```
+
+#### side effect
+Chia lam 2 loai side effects
+- khong can clean up: Goi API, tuong tac DOM
+- can clean up: subscriptions, setTimeout, setInterval
+
+## useEffect()
+Sau moi lan render
+```
+function useEffect(callback, dependencies) {}
+```
+
+```
+function App() {
+  const [color, setColor] = useState('deeppink');
+
+  useEffect(() => {
+    // Effect
+
+    return () => {
+      //Clean up
+    };
+  }, []);
+
+  return <h1>ABC DEF</h1>
+}
+```
+
+MOUNTING
+- rendering
+- run useEffect()
+
+UPDATING
+- rendering
+- run `userEffect() cleanup` : neu dependencies thay doi.
+- run `userEffect()`: neu dependencies thay doi.
+
+UNMOUTING
+- run `userEffect() cleanup`
+
+Dieu Khien:
+```
+function App() {
+  const [filters, setFilters] = userState();
+
+  useEffect(() => {
+    // luon luon dc chay sau moi lan render
+    return () => {
+      // luon luon dc chay sau moi lan render
+    };
+  });
+  
+  useEffect(() => {
+    // chay 1 lan sau render dau tien
+    return () => {
+      // chay 1 lan sau render dau tien
+    };
+  }, []);
+
+  useEffect(() => {
+    // chay  sau render
+
+    return () => {
+      // chay khi filters thay doi
+    };
+  }, [filters]);
+}
+```
+
+Life cycle -> useEffect() hook
+```
+class App extend PureComponent {
+  componentDidMount() { console.log('Component Did Mount'); }
+
+  componentWillUnmount() { console.log('Component Will Unmount'); }
+}
+
+// chay dung 1 lan
+class App {
+  useEffect(() => {
+    console.log('Component Did Mount');
+
+    return () => {
+      console.log('Component Will Unmount');
+    };
+  }, []);
+}
+```
+
+```
+// check dieu kien
+
+class App extend PureComponent {
+  componentDidMount() { console.log('Component Did Mount or Did Update'); }
+
+  componentDidUpdate() { console.log('Component Did Mount or Did Update'); }
+}
+
+// chay dung 1 lan
+class App {
+  useEffect(() => { console.log('Component Did Mount or Did Update'); });
 }
 ```
