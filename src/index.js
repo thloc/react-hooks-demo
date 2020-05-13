@@ -5,6 +5,8 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
+  // React.StrictMode lam render 2 lan. Chi co o moi truong dev. Production ko hien 2 lan
+
   <React.StrictMode>
     <App />
   </React.StrictMode>,
