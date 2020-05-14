@@ -269,3 +269,33 @@ class App {
   useEffect(() => { console.log('Component Did Mount or Did Update'); });
 }
 ```
+
+## Custom hook
+dung "use...()"
+
+```
+function useMagicColor() {
+  const [color, setColor] = useState('green');
+
+  useEffect(() => {
+    const intervalRef = setInterval(() => {
+      const newColor = randomColor();
+      setColor(newColor);
+    }, 2000);
+
+    return () => {
+      clearInterval(intervalRef);
+    }
+  }, []);
+
+  // Custom hooks return data instead of JSK
+  return color;
+}
+
+
+function MagicBox() {
+  const color = useMagicColor();
+
+  return <div className="magic-box" style={{ backgroundColor: color }}></div>;
+}
+```
