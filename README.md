@@ -345,3 +345,48 @@ function Hero() {
 }
 export defaut React.memo(Hero);
 ```
+
+## useCallback()
+- La react hooks, nhan vao 2 tham so: 1 la function, 2 la dependencies
+- return memozied callback
+- Chi tao ra function moi khi dependencies thay doi
+- Neu dung empty dependencies thi KO tao ra FUNCTION moi
+```
+// App re-render
+// -> tao ra 1 function moi
+// -> Chart bi re-render
+
+function App() {
+  const handleChartTypeChange = (type) => {}
+  return <Chart onTypeChange={handleChartTypeChange} />
+}
+
+// Moi lan App re-render
+// -> dung useCallback() chi tao function 1 lan dau
+// -> nen Chart ko bi re-render
+
+function App() {
+  const handleChartTypeChange = useCallback((type) => {}, [])
+  return <Chart onTypeChange={handleChartTypeChange} />
+}
+```
+
+## useMemo()
+- La react hooks, nhan vao 2 tham so: 1 la function, 2 la dependencies
+- Chi tinh toan value moi khi depencies thay doi
+- Neu dung empty dependencies thi KO tao ra VALUE moi
+```
+fucntion App() {
+  const data = [{}, {}, {}];
+  return <Chart data={data}/>
+}
+
+fucntion App() {
+  const data = useMemo(() => [{}, {}, {}], []);
+  return <Chart data={data}/>
+}
+```
+
+useCallback() va useMemo():
+- Chi dung: Do thi, Bieu do, animations, nhung component nang phan render
+- Chi ra micro improvements
