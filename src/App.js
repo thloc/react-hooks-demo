@@ -10,6 +10,7 @@ import Pagination from './components/Pagination';
 import PostFiltersForm from './components/PostFiltersForm';
 import Clock from './components/Clock';
 import BetterClock from './components/BetterClock';
+import MagicBox from './components/MagicBox';
 
 function App() {
   const [todoList, setTodoList] = useState([
@@ -115,6 +116,11 @@ function App() {
         <button onClick={() => setShowClock(!showClock)}>Hide Clock</button>
         {showClock && <Clock />}
         <BetterClock/>
+
+      <div>
+        <h1>React Hooks - MagicBox</h1>
+        <MagicBox/>
+      </div>
     </div>
   );
 }
