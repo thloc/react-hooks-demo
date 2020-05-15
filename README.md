@@ -299,3 +299,49 @@ function MagicBox() {
   return <div className="magic-box" style={{ backgroundColor: color }}></div>;
 }
 ```
+
+## Memoization
+```
+const addMeno = (a, b) => {
+  // Init cache
+  if (!addMemo.cache) {
+    addMeno.cache = {};
+  }
+
+  // Return cache if fond
+  const key = `${a}_${b}`;
+  const synmetricKey = `${b}_${a}`;
+  if (addMeno.cache[key]) return addMeno.cache[key];
+  if (addMeno.cache[synmetricKey]) return addMeno.cache[synmetricKey];
+
+  // Calculate and save to cache
+  const sum = a + b;
+  addMemo.cache[key] = sum;
+  addMemo.cache[synmetricKey] = sum;
+  return sum
+}
+
+add(2, 3); // Tinh toan & luu cache, => 5
+add(3, 2); // Phat hien da co trong cache => 5
+add(1, 2); // Ko co trong cache, Tinh toan & luu cache, => 3
+```
+
+## React.memo()
+- La HOC, khong hooks
+- Tuong tu PureComponent
+- PureComponent cho Class component
+- React.memo() cho functional component
+- Chi render lai component ner props thay doi
+- Su dung shallow comparison
+```
+// Class component - PureComponent
+export default class Hero extends PureComponent {
+  return () { return <div>Super hero!</div> }
+}
+
+// Functional component - React.memo
+function Hero() {
+  return () { return <div>Super hero!</div> }
+}
+export defaut React.memo(Hero);
+```
